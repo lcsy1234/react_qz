@@ -2,7 +2,10 @@
 
 ## 目标
 
-在 `react_demo` 用 Vite + React + TypeScript + Ant Design 做一个用户管理业务页，对接 `go_demo` 后端 User API，方便本地测接口与操作真实数据。
+在 `react_qz` 用 Vite + React + TypeScript + Ant Design 做一个用户管理业务页，对接 `go_demo` 后端 User API，方便本地测接口与操作真实数据。
+
+- 本地路径：`/Users/yqsl/Documents/study/qz_study/react_qz`
+- GitHub 仓库：https://github.com/lcsy1234/react_qz
 
 ## 技术栈
 
@@ -65,7 +68,7 @@
 ## 目录结构
 
 ```
-react_demo/
+react_qz/
   docs/superpowers/specs/   # 本设计文档
   src/
     api/http.ts             # fetch 封装，解析 GoFrame 响应
@@ -105,5 +108,5 @@ react_demo/
 ## 本地运行
 
 1. 后端：`go_demo` 服务监听 `:8000`
-2. 前端：`cd react_demo && npm install && npm run dev`
+2. 前端：`cd react_qz && npm install && npm run dev`
 3. 浏览器打开 Vite 提示的本地地址（通常 `http://localhost:5173`）
