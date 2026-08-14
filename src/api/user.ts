@@ -1,11 +1,22 @@
 import { request } from './http'
 import type { CreateUserResult, UserFormValues, UserListResult } from '../types/user'
 
-export function fetchUserList(page: number, size: number) {
+export interface FetchUserListParams {
+  page: number
+  size: number
+  name?: string
+}
+
+export function fetchUserList({ page, size, name }: FetchUserListParams) {
   const qs = new URLSearchParams({
     page: String(page),
     size: String(size),
   })
+  const keyword = name?.trim()
+  if (keyword) {
+    qs.set('name', keyword)
+  }
+  // GET 列表：参数走 query，不要放 body（浏览器/代理常忽略 GET body）
   return request<UserListResult>(`/user/list?${qs.toString()}`)
 }
 
