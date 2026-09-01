@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  id="Definitions_ParallelDemo"
+  targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_ParallelDemo" name="设备并行配置流程" isExecutable="false">
+    <bpmn:startEvent id="StartEvent_1" name="开始" />
+    <bpmn:userTask id="Task_DeviceSelect" name="设备选择" />
+    <bpmn:parallelGateway id="Gateway_Fork" name="并行拆分" />
+    <bpmn:userTask id="Task_Network" name="网络配置" />
+    <bpmn:userTask id="Task_Params" name="参数配置" />
+    <bpmn:userTask id="Task_Auth" name="权限配置" />
+    <bpmn:parallelGateway id="Gateway_Join" name="并行合并" />
+    <bpmn:userTask id="Task_Finish" name="执行完成" />
+    <bpmn:endEvent id="EndEvent_1" name="结束" />
+
+    <bpmn:sequenceFlow id="Flow_Start_Device" sourceRef="StartEvent_1" targetRef="Task_DeviceSelect" />
+    <bpmn:sequenceFlow id="Flow_Device_Fork" sourceRef="Task_DeviceSelect" targetRef="Gateway_Fork" />
+    <bpmn:sequenceFlow id="Flow_Fork_Network" sourceRef="Gateway_Fork" targetRef="Task_Network" />
+    <bpmn:sequenceFlow id="Flow_Fork_Params" sourceRef="Gateway_Fork" targetRef="Task_Params" />
+    <bpmn:sequenceFlow id="Flow_Fork_Auth" sourceRef="Gateway_Fork" targetRef="Task_Auth" />
+    <bpmn:sequenceFlow id="Flow_Network_Join" sourceRef="Task_Network" targetRef="Gateway_Join" />
+    <bpmn:sequenceFlow id="Flow_Params_Join" sourceRef="Task_Params" targetRef="Gateway_Join" />
+    <bpmn:sequenceFlow id="Flow_Auth_Join" sourceRef="Task_Auth" targetRef="Gateway_Join" />
+    <bpmn:sequenceFlow id="Flow_Join_Finish" sourceRef="Gateway_Join" targetRef="Task_Finish" />
+    <bpmn:sequenceFlow id="Flow_Finish_End" sourceRef="Task_Finish" targetRef="EndEvent_1" />
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_ParallelDemo">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="189" y="275" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_DeviceSelect_di" bpmnElement="Task_DeviceSelect">
+        <dc:Bounds x="270" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Gateway_Fork_di" bpmnElement="Gateway_Fork" isMarkerVisible="true">
+        <dc:Bounds x="425" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="419" y="282" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_Network_di" bpmnElement="Task_Network">
+        <dc:Bounds x="530" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_Params_di" bpmnElement="Task_Params">
+        <dc:Bounds x="530" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_Auth_di" bpmnElement="Task_Auth">
+        <dc:Bounds x="530" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Gateway_Join_di" bpmnElement="Gateway_Join" isMarkerVisible="true">
+        <dc:Bounds x="685" y="225" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="679" y="282" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_Finish_di" bpmnElement="Task_Finish">
+        <dc:Bounds x="790" y="210" width="100" height="80" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="EndEvent_1_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="952" y="232" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="959" y="275" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Flow_Start_Device_di" bpmnElement="Flow_Start_Device">
+        <di:waypoint x="218" y="250" />
+        <di:waypoint x="270" y="250" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Device_Fork_di" bpmnElement="Flow_Device_Fork">
+        <di:waypoint x="370" y="250" />
+        <di:waypoint x="425" y="250" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Fork_Network_di" bpmnElement="Flow_Fork_Network">
+        <di:waypoint x="450" y="225" />
+        <di:waypoint x="450" y="120" />
+        <di:waypoint x="530" y="120" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Fork_Params_di" bpmnElement="Flow_Fork_Params">
+        <di:waypoint x="475" y="250" />
+        <di:waypoint x="530" y="250" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Fork_Auth_di" bpmnElement="Flow_Fork_Auth">
+        <di:waypoint x="450" y="275" />
+        <di:waypoint x="450" y="380" />
+        <di:waypoint x="530" y="380" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Network_Join_di" bpmnElement="Flow_Network_Join">
+        <di:waypoint x="630" y="120" />
+        <di:waypoint x="710" y="120" />
+        <di:waypoint x="710" y="225" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Params_Join_di" bpmnElement="Flow_Params_Join">
+        <di:waypoint x="630" y="250" />
+        <di:waypoint x="685" y="250" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Auth_Join_di" bpmnElement="Flow_Auth_Join">
+        <di:waypoint x="630" y="380" />
+        <di:waypoint x="710" y="380" />
+        <di:waypoint x="710" y="275" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Join_Finish_di" bpmnElement="Flow_Join_Finish">
+        <di:waypoint x="735" y="250" />
+        <di:waypoint x="790" y="250" />
+      </bpmndi:BPMNEdge>
+
+      <bpmndi:BPMNEdge id="Flow_Finish_End_di" bpmnElement="Flow_Finish_End">
+        <di:waypoint x="890" y="250" />
+        <di:waypoint x="952" y="250" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
